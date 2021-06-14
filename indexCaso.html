@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/toastr.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/toastr.js"></script>
+    <script type="text/javascript" src="js/axios.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <title>Casos</title>
+</head>
+<body>
+    <div class="container">
+            
+        <div id="crud" class="row">
+            <div class="col-xs-12">
+                <h1 class="page-header text-center"> Ventana Casos </h1>
+            </div>
+        
+            <div class="col-sm-12">
+                <h2>
+                    Listado de Casos
+                    <a href="#" class="add btn btn-primary pull-right" data-toggle="modal" data-target="#addcaso">
+                     Nuevo Caso
+                    </a>
+                </h2>
+                <table class="table table-hover table-sprite">
+                    <thead>
+                        <tr>
+                            <th width="20px"> ID </th>
+                            <th>Trazabilidad</th>
+                            <th>Fecha Alta</th>
+                            <th>Modelos</th>
+                            <th width="10px">Acción</th>
+                        
+                        </tr>        
+                    </thead>
+                    <tbody>
+                        <tr v-for="caso in cases">
+                            <td width="10px">1</td>
+                            <td>Prueba</td>
+                            <td>15/06/2021 18:00:00</td>
+        
+                            <td width="10px">
+                                <a href="#" class="btn btn-info" v-on:click="loadModels(caso)" >Listar</a>
+                            </td>
+                            <td width="10px">
+                                <a href="#" class="btn btn-danger btn-sm" v-on:click="deleteCase(caso)">Eliminar</a>
+                            </td>
+        
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form method="POST" v-on:submit.prevent="createCase">
+                <div class="modal fade" id="addcaso">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>×</span>
+                                </button>
+                                <h4>Nuevo Caso</h4>
+                            </div>
+                            <div class="modal-body">
+                
+                                <label for="traza">Trazabilidad</label>
+                                <input type="text" name="Trazabilidad_hospital" class="form-control" v-model="newTraza">                       
+                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                                <!--<span v-for="error in errors" class="text-danger">@{{ error }}</span>-->
+                            </div>
+                                
+                
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-primary" value="Guardar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+        </div>
+
+    </div>
+</body>
+</html>
