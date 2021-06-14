@@ -24,11 +24,11 @@
             <div class="col-sm-12">
                 <h2>
                     Listado de Casos
-                    <a href="#" class="add btn btn-primary pull-right" data-toggle="modal" data-target="#addcaso">
+                    <a href="#" class="add btn btn-primary pull-right" data-toggle="modal">
                      Nuevo Caso
                     </a>
                 </h2>
-                <table class="table table-hover table-sprite">
+                <table id="table" class="table table-hover table-sprite">
                     <thead>
                         <tr>
                             <th width="20px"> ID </th>
@@ -40,23 +40,10 @@
                         </tr>        
                     </thead>
                     <tbody>
-                        <tr v-for="caso in cases">
-                            <td width="10px">1</td>
-                            <td>Prueba</td>
-                            <td>15/06/2021 18:00:00</td>
-        
-                            <td width="10px">
-                                <a href="#" class="btn btn-info" v-on:click="loadModels(caso)" >Listar</a>
-                            </td>
-                            <td width="10px">
-                                <a href="#" class="btn btn-danger btn-sm" v-on:click="deleteCase(caso)">Eliminar</a>
-                            </td>
-        
-                        </tr>
                     </tbody>
                 </table>
             </div>
-            <form method="POST" v-on:submit.prevent="createCase">
+            <form id="formAddCase">
                 <div class="modal fade" id="addcaso">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -69,19 +56,18 @@
                             <div class="modal-body">
                 
                                 <label for="traza">Trazabilidad</label>
-                                <input type="text" name="Trazabilidad_hospital" class="form-control" v-model="newTraza">                       
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                                <input id="inputTraza" type="text" name="traza" class="form-control">                       
                                 <!--<span v-for="error in errors" class="text-danger">@{{ error }}</span>-->
                             </div>
                                 
                 
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Guardar">
+                                <input type="submit" class="btn btn-primary" value="Guardar" onclick="newCaso">
                             </div>
                         </div>
                     </div>
                 </div>
-                </form>
+            </form>
         </div>
 
     </div>
