@@ -1,7 +1,11 @@
 <?php
 
 // Carga configuracion
-require("config.php");
+//require("config.php");
+
+echo "LLEGO2";
+$tra=$_GET['Traza'];
+$date=$_GET['Fecha'];
 
 if ((! isset ( $_GET['Traza'] )) || (! isset ( $_GET['Fecha'] )))  { echo "0"; return; }
 
@@ -9,7 +13,12 @@ if ((! isset ( $_GET['Traza'] )) || (! isset ( $_GET['Fecha'] )))  { echo "0"; r
 $db=mysqli_connect("Localhost", $DB_USER, $DB_PASS, $DB_NAME);
 if (mysqli_connect_errno()) { echo "0" ; return ; }
 
-$query = mysqli_query($db, "INSERT INTO casos (Trazabilidad_hospital, Fecha_hora_de_alta) VALUES ('".$_GET['Traza']."', '".$_GET['Fecha']."');");      		
+
+
+//echo json_encode(array('TRAZA' => 1));
+//response= "TRAZA:".$_GET['Traza'].", FECHA:".$_GET['Fecha'];
+
+$query = mysqli_query($db, "INSERT INTO casos (Trazabilidad_hospital, Fecha_hora_de_alta) VALUES ('".$_GET ['Traza']."', '".$_GET ['Fecha']."');");      		
 
 
 ?>

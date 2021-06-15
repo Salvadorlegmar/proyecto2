@@ -20,18 +20,27 @@ function newCaso(){
 	console.log("TRAZA:"+traza+", fecha:"+dateString);
 
 	$.ajax({
-        url: '/php/addCaso.php',
+        url: 'php/addCaso.php',
         type: 'GET',
-		data: {"Traza" : traza, "Fecha" : dateString},
-        processData: false,
-		contentType: false,
-		dataType: 'json',
-        success: function(data) {
-
+		data: {Traza : traza, Fecha : dateString},
+        success: function(response){
+            var jsonData = JSON.parse(response);
+			console.log(jsonData);
 
 		}
     });
-
+	/*$.ajax({
+        url: 'php/addCaso.php',
+        type: 'get',
+		dataType: 'json'
+        
+    })
+	.done(function(){
+		alert("ESTA VA");
+	})
+	.fail(function(){
+		alert("ESTO FALLA");
+	});*/
 
 
 }
