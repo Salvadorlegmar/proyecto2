@@ -5,12 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Latest minified bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/toastr.css">
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
     <script type="text/javascript" src="js/axios.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/caso/main.js"></script>
+    <!--<script type="text/javascript" src="js/app.js"></script>-->
     <title>Casos</title>
 </head>
 <body>
@@ -24,9 +29,10 @@
             <div class="col-sm-12">
                 <h2>
                     Listado de Casos
-                    <a href="#" class="add btn btn-primary pull-right" data-toggle="modal">
-                     Nuevo Caso
-                    </a>
+                    <button id="btn_new" class="add btn btn-primary pull-right" data-toggle="modal">
+                        Nuevo Caso
+                    </button>
+
                 </h2>
                 <table id="table" class="table table-hover table-sprite">
                     <thead>
@@ -43,33 +49,35 @@
                     </tbody>
                 </table>
             </div>
-            <form id="formAddCase">
-                <div class="modal fade" id="addcaso">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>×</span>
-                                </button>
-                                <h4>Nuevo Caso</h4>
-                            </div>
-                            <div class="modal-body">
-                
-                                <label for="traza">Trazabilidad</label>
-                                <input id="inputTraza" type="text" name="traza" class="form-control">                       
-                                <!--<span v-for="error in errors" class="text-danger">@{{ error }}</span>-->
-                            </div>
-                                
-                
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" value="Guardar" onclick="newCaso">
-                            </div>
+       
+            <div class="modal fade" id="formAddCase" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">        
+                                 
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>×</span>
+                            </button>
+                            <h4>Nuevo Caso</h4>
                         </div>
+                        <div class="modal-body">
+                
+                            <label for="traza">Trazabilidad</label>
+                            <input id="inputTraza" type="text" name="traza" class="form-control">                       
+                                
+                        </div>
+                                
+                        <div class="modal-footer">
+                            <input  id="addCase" type="submit" class="btn btn-primary" value="Guardar" onclick="newCaso">
+                        </div>
+                        
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
     </div>
+
+
 </body>
 </html>

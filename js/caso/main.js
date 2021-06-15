@@ -1,8 +1,23 @@
+$(document).ready(function() {
+	$("#btn_new").on("click", function(){
+		$("#formAddCase").modal();
+	});
+
+	$("#addCase").on("click", function(){
+		newCaso();
+	});
+
+
+});
+
+
 function newCaso(){
 	var traza=$("#inputTraza").val();
 	var m=new Date();
 	var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + 
 	(m.getUTCHours()+2) + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+
+	console.log("TRAZA:"+traza+", fecha:"+dateString);
 
 	$.ajax({
         url: '/php/addCaso.php',
@@ -30,15 +45,16 @@ function listCasos(){
 		dataType: 'json',
         success: function(data) {
 			$.each(data, function(i, item) {
-			element="<tr><td width='10px'>"+item.Id+"</td>";
-			element+="<td>"+item.Traza+"</td>";
-			element+="<td>"+item.Fecha+"</td>";
-			element+="<td width='10px'><a href='#' class='btn btn-info' onclick='loadModels()'>Listar</a></td>";
-			element+="<td width='10px'><a href='#' class='btn btn-danger btn-sm' onclick='deleteCase()'>Eliminar</a></td><tr>";
+				element="<tr><td width='10px'>"+item.Id+"</td>";
+				element+="<td>"+item.Traza+"</td>";
+				element+="<td>"+item.Fecha+"</td>";
+				element+="<td width='10px'><a href='#' class='btn btn-info' onclick='loadModels()'>Listar</a></td>";
+				element+="<td width='10px'><a href='#' class='btn btn-danger btn-sm' onclick='deleteCase()'>Eliminar</a></td><tr>";
 
-			$("#table > tbody").append(element);
-
+				$("#table > tbody").append(element);
+			});
 		}
+
     });
 }
 
