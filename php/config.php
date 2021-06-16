@@ -16,7 +16,7 @@ $LANGUAGE_DEFAULT = "es_ES";
 // DataBase
 $DB_LOCAL_SERVER = "Localhost";
 $DB_USER= "root";
-$DB_PASS = "";
+$DB_PASS = "anvimur2001lrvfg";
 $DB_NAME = "Cella2";
 $DB_SERVER = "localhost";
 

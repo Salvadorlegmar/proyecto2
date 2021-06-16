@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/caso/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <!-- Latest minified bootstrap css -->
     <link rel="stylesheet" href="css/toastr.css">
+
+    <script type="text/javascript" src="js/caso/main.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="js/toastr.js"></script>
     <script type="text/javascript" src="js/axios.js"></script>
-    <script type="text/javascript" src="js/caso/main.js"></script>
-    <!--<script type="text/javascript" src="js/app.js"></script>-->
     <title>Casos</title>
 </head>
-<body>
+<body onload="init();">
     <div class="container">
             
         <div id="crud" class="row">
             <div class="col-xs-12">
-                <h1 class="page-header text-center"> Ventana Casos </h1>
+                <h1 class="page-header text-center"> Ventana de Casos </h1>
             </div>
         
             <div class="col-sm-12">
@@ -36,11 +36,11 @@
                 <table id="table" class="table table-hover table-sprite">
                     <thead>
                         <tr>
-                            <th width="20px"> ID </th>
-                            <th>Trazabilidad</th>
-                            <th>Fecha Alta</th>
-                            <th>Modelos</th>
-                            <th width="10px">Acción</th>
+                            <th width="5%"> ID </th>
+                            <th widht="40%">Trazabilidad</th>
+                            <th width="20%">Fecha Alta</th>
+                            <th width="15%">Modelos</th>
+                            <th width="20%">Acciones</th>
                         
                         </tr>        
                     </thead>
@@ -49,6 +49,7 @@
                 </table>
             </div>
        
+            <!-- Begin Add new Case-->
             <div class="modal fade" id="formAddCase" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">        
@@ -67,12 +68,49 @@
                         </div>
                                 
                         <div class="modal-footer">
-                            <input  id="addCase" type="submit" class="btn btn-primary" value="Guardar" onclick="newCaso">
+                            <input id="addCase" type="submit" class="btn btn-primary" value="Guardar">
                         </div>
                         
                     </div>
                 </div>
             </div>
+            <!-- End Add new Case-->
+            <!-- Begin Add new Model-->
+            <div class="modal fade" id="formAddModel" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">        
+                                 
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>×</span>
+                            </button>
+                            <h4>Nuevo Modelo</h4>
+                        </div>
+                        <div class="modal-body">
+                
+                            <label for="name">Nombre del Modelo</label>
+                            <input id="inputName" type="text" name="traza" class="form-control">                       
+                            <br>    
+                            <div>
+                                <label for="tipe">Tipo</label>
+                                <select id="tipo_id" class="form-select" aria-label="Default select example">
+                                    <option value="otro">Otro</option>
+                                    <option value="hepatico">Hepático</option>
+                                    <option value="pancreatico">Pancreático</option>
+                                    <option value="colorrectal">colorrectal</option>
+                                    <option value="tiroides">Tiroides</option>
+                                </select>
+                            </div>
+                        </div>
+                                
+                        <div class="modal-footer">
+                            <input  id="addModel" type="submit" class="btn btn-primary" value="Guardar" onclick="newCaso">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- End Add new Model-->
         </div>
 
     </div>

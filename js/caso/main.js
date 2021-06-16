@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$("#btn_new").on("click", function(){
 		$("#formAddCase").modal();
 	});
@@ -8,7 +8,19 @@ $(document).ready(function() {
 	});
 
 
-});
+});*/
+
+function init(){
+	$("#btn_new").on("click", function(){
+		$("#formAddCase").modal();
+	});
+
+	$("#addCase").on("click", function(){
+		//newCaso();
+		$("#formAddCase").modal('hide');
+		listCasos();
+	});
+}
 
 
 function newCaso(){
@@ -19,90 +31,81 @@ function newCaso(){
 
 	console.log("TRAZA:"+traza+", fecha:"+dateString);
 
-	$.ajax({
+	
+
+	/*$.ajax({
         url: 'php/addCaso.php',
         type: 'GET',
 		data: {Traza : traza, Fecha : dateString},
         success: function(response){
-            var jsonData = JSON.parse(response);
+            var jsonData = JSON.stringify(response);
 			console.log(jsonData);
 
 		}
-    });
-	/*$.ajax({
+    });*/
+	$.ajax({
         url: 'php/addCaso.php',
-        type: 'get',
-		dataType: 'json'
-        
+        type: 'post',
+		dataType: 'json',
+        data: {Traza : traza, Fecha : dateString}
     })
-	.done(function(){
-		alert("ESTA VA");
+	.done(function(response){
+		var jsonData = JSON.stringify(response);
+		console.log("Salida:"+jsonData);
+		toastr.success('Nueva Caso creada con éxito');
+
 	})
-	.fail(function(){
-		alert("ESTO FALLA");
-	});*/
+	.fail(function(response){
+		var jsonData = JSON.stringify(response);
+		//console.log(jsonData);
+		toastr.error('Fallo. No se ha podido añadir el Caso.');
+
+	});
 
 
 }
+
 
 function listCasos(){
 	$.ajax({
-        url: '/php/getCasos.php',
-        type: 'GET',
+        url: 'php/getCasos.php',
+        type: 'get',
         processData: false,
 		contentType: false,
-		dataType: 'json',
-        success: function(data) {
-			$.each(data, function(i, item) {
-				element="<tr><td width='10px'>"+item.Id+"</td>";
-				element+="<td>"+item.Traza+"</td>";
-				element+="<td>"+item.Fecha+"</td>";
-				element+="<td width='10px'><a href='#' class='btn btn-info' onclick='loadModels()'>Listar</a></td>";
-				element+="<td width='10px'><a href='#' class='btn btn-danger btn-sm' onclick='deleteCase()'>Eliminar</a></td><tr>";
+		dataType: 'json'
+	})
+    .done(function(response){
+		$.each(response, function(i, item) {
+			console.log(item.Id);
 
-				$("#table > tbody").append(element);
-			});
-		}
+			element="<tr><td width='10px'>"+item.Id+"</td>";
+			element+="<td>"+item.Traza+"</td>";
+			element+="<td>"+item.Fecha+"</td>";
+			element+="<td width='10px'><a href='#' class='btn btn-info' onclick='loadModels()'>Listar</a></td>";
+			element+="<td><div class='form-group row justify-content-center'>";
+			element+="<div class='col-sm-6'><button id='newModel' class='btn btn-primary' onclick='addModelo("+item.Id+")'>Nuevo Modelo</button></div>";
+			element+="<div class='col-sm-6'><button id='delcase' class='btn btn-danger' onclick='deleteCase("+item.Id+")'>Eliminar</button></div>";
+			element+="</div></td></tr>"
 
-    });
+
+			$("#table > tbody").append(element);
+		});
+	});
+		
+
 }
 
+function deleteCase(id_case){
+	alert("ELIMINAR "+id_case);
 
-/*$.ajax({
-        url: '/php/addCaso.php',
-        type: 'GET',
-        processData: false,
-		contentType: false,
-		dataType: 'json',
-        success: function(data) {
-			$.each(data.images, function(i, item) {
-				//console.log(item.url);
+}
 
-				//Create HTML element
-				element="<div class='carousel-item";
+function loadModels(){
+	window.location="indexModelo.html";
 
-				//Adding active class if slide is the first
-				if(curIndex==1) element+=" active";
-				element+="'>"
+}
 
-				element+="<img id='img"+curIndex+"' class='d-block w-100 img-fluid' src='' alt='Slide"+curIndex+"'>";
-				element+="<div id='txt"+curIndex+"' class='carousel-caption d-none d-md-block'>";
-				element+="<h5></h5></div></div>";
-
-				//Adding element to HTML body
-				$(".carousel-inner").append(element); 
-
-				urlImage = item.url.toString();
-				if(item.text===null){
-					urlText='';
-				}else{
-					urlText = item.text.toString();
-				}
-				
-				$('#img'+(curIndex)).attr("src",urlImage);
-				$('#txt'+(curIndex)+'> h5').text(urlText);
-
-				curIndex+=1;
-			});
-        }
-    });*/
+function addModelo(id_case){
+	/*alert("AÑADIR MODELO PARA:"+id_case);*/
+	$("#formAddModel").modal();
+}

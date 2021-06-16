@@ -1,7 +1,7 @@
 <?php
 
 // Carga configuracion
-require("/php/config.php");
+require("config.php");
 
 
 // Conecta con la base de datos
@@ -33,3 +33,6 @@ for($j=0; $j<$max; $j++) {
     $resultado=array('Id'=> $IDs[$j], 'Traza' => $Trazas[$j], 'Fecha' => $Fechas[$j]);
     $respuesta[$j]=$resultado;
 }
+
+echo json_encode($respuesta);
+mysqli_close($db);
