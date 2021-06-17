@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/toastr.css">
 
-    <script type="text/javascript" src="js/caso/main.js"></script>
+    <script type="text/javascript" src="js/modelo/mainModelo.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -17,18 +17,23 @@
     <script type="text/javascript" src="js/axios.js"></script>
     <title>Casos</title>
 </head>
-<body onload="init();">
+<body onload="listModels();">
     <div class="container">
             
         <div id="crud" class="row">
             <div class="col-xs-12">
                 <h1 class="page-header text-center"> Ventana de Modelos </h1>
+                <h1 id="nameCaso" class="text-center"></h1>
             </div>
         
+            <!--<div id="nameCaso" class="col-xs-12">
+                <h1 class="text-center"></h1>
+            </div>-->
+
             <div class="col-sm-12">
                 <h2>
                     Listado de Modelos
-                    <button id="btnback" class="add btn btn-primary pull-right">
+                    <button id="btnback" class="add btn btn-primary pull-right" onclick="returnToCases()">
                         Volver
                     </button>
 
