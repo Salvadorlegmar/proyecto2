@@ -76,7 +76,7 @@ CREATE TABLE `modelos` (
   `ID_MODELO` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ID_CASO` int(10) unsigned NOT NULL,
   `Nombre_del_modelo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Tipo` enum('hepático','pancreático','colorrectal','tiroides','otro') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Tipo` enum('hepatico','pancreatico','colorrectal','tiroides','otro') COLLATE utf8mb4_unicode_ci NOT NULL,
   `Fecha_hora_de_alta` datetime NOT NULL,
   PRIMARY KEY (`ID_MODELO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

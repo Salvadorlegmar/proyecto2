@@ -30,8 +30,9 @@ function openModalCase(){
 }
 
 function hideModalCase(){
-	//newCaso();
+	newCaso();
 	$("#formAddCase").modal('hide');
+	//window.location="indexCaso.html";
 	listCasos();
 }
 
@@ -80,6 +81,8 @@ function newCaso(){
 
 
 function listCasos(){
+	$("#table > tbody > tr").remove();
+
 	$.ajax({
         url: 'php/getCasos.php',
         type: 'get',
@@ -145,16 +148,7 @@ function newModel(){
 
 	
 
-	/*$.ajax({
-        url: 'php/addCaso.php',
-        type: 'GET',
-		data: {Traza : traza, Fecha : dateString},
-        success: function(response){
-            var jsonData = JSON.stringify(response);
-			console.log(jsonData);
 
-		}
-    });*/
 	$.ajax({
         url: 'php/addModelo.php',
         type: 'post',
