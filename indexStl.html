@@ -5,23 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" href="css/caso/style.css">
+    <link rel="stylesheet" href="css/stl/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/toastr.css">
-    <link href="css/bootstrap-colorpicker/bootstrap-colorpicker.css" rel="stylesheet">
+    <!--<link href="css/bootstrap-colorpicker/bootstrap-colorpicker.css" rel="stylesheet">-->
 
-    <script type="text/javascript" src="js/modelo/mainModelo.js"></script>
+    <script type="text/javascript" src="js/stl/mainStl.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/jscolor.js"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="js/toastr.js"></script>
     <script type="text/javascript" src="js/axios.js"></script>
-    <script src="js/bootstrap-colorpicker/bootstrap-colorpicker.js"></script>
+    <!--<script src="js/bootstrap-colorpicker/bootstrap-colorpicker.js"></script>-->
 
     <title>Casos</title>
 </head>
-<body onload="listModels();">
+<body onload="lisSTLs();">
     <div class="container">
             
         <div id="crud" class="row">
@@ -37,7 +38,7 @@
             <div class="col-sm-12">
                 <h2>
                     Listado de STL's
-                    <button id="btnback" class="add btn btn-primary pull-right" onclick="returnToCases()">
+                    <button id="btnback" class="add btn btn-primary pull-right" onclick="returnToModels()">
                         Volver
                     </button>
 
@@ -46,12 +47,12 @@
                     <thead>
                         <tr>
                             <th width="5%"> ID </th>
-                            <th widht="30%">Nombre</th>
-                            <th width="10%">Color</th>
-                            <th width="10%">Visible</th>
+                            <th widht="40%">Nombre</th>
+                            <th width="15%">Color</th>
+                            <th width="5%">Visible</th>
                             <th width="10%">Transparencia</th>
                             <th width="5%">Orden</th>
-                            <th width="30%">Acciones</th>
+                            <th width="20%">Acciones</th>
                         
                         </tr>        
                     </thead>
@@ -60,7 +61,7 @@
                 </table>
             </div>
             <!-- Begin Add new stl-->
-            <div class="modal fade" id="formAddSTL" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="formEditSTL" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">        
                                  
@@ -68,7 +69,7 @@
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>×</span>
                             </button>
-                            <h4>Nuevo Elemento STL</h4>
+                            <h4>Edición Elemento STL</h4><h4 id="idstl">
                         </div>
                         <div class="modal-body">
                 
@@ -78,20 +79,11 @@
                             <br>
                             <!--<label for="color">Color</label>
                             <input id="inputName" type="text" name="name" class="form-control">-->
-                            <div id="color-picker-rgb" class="input-group colorpicker-component">
-                                <input type="text" value="#05FF44" class="form-control"/>
-                                <span class="input-group-addon"><i></i></span>
-                            </div>
-                            <script>
-                                $(function () {
-                                    $('#color-picker-rgb').colorpicker({
-                                        color: '#05FF44',
-                                        format: 'rgba'
-                                    });
-                                });
-                            </script>
+                            Color: <input id="inputModalcolor" value="#3399FF80" data-jscolor="{}">
 
-                            <br>    
+                            <br>
+                            <br>
+
                             <div>
                                 <label for="visible">Visible</label>
                                 <select id="visible_id" class="form-select" aria-label="Default select example">
@@ -109,7 +101,7 @@
                         </div>
                                 
                         <div class="modal-footer">
-                            <input id="addSTL" type="submit" class="btn btn-primary" value="Guardar" onclick="hideModalSTL()">
+                            <input id="updateSTL" type="submit" class="btn btn-primary" value="Guardar" onclick="hideModalUpdateTL()">
                         </div>
                         
                     </div>

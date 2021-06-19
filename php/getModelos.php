@@ -3,7 +3,7 @@
 // Carga configuracion
 require("config.php");
 
-//if ((! isset ( $_GET['IDCase'] )) )  { echo "0"; return; }
+if ((! isset ( $_POST['IDCase'] )) )  { echo "0"; return; }
 
 // Conecta con la base de datos
 //$db=mysqli_connect("Localhost", $DB_USER, $DB_PASS, $DB_NAME);
@@ -17,7 +17,7 @@ if (!$conn) {
 $conection="Connected successfully";
 
 // Variables
-//$caso=$_GET['IDCase'];
+$caso=$_POST['IDCase'];
 $IDsC[] = array();
 $IDsM[] = array();
 $Nombres[] = array(); 
@@ -29,7 +29,7 @@ $i=0;
 
 // Realiza la consulta - Obtenemos los datos de los modelos
 //$sql=mysqli_query($conn, "SELECT ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$caso.";");
-$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos;");
+$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$caso.";");
 
 while($row = mysqli_fetch_array($sql)) {
     $IDsC[$i] = $row[0];

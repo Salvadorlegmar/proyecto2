@@ -54,7 +54,7 @@ CREATE TABLE `modelos` (
   `Fecha_hora_de_alta` datetime NOT NULL,
   PRIMARY KEY (`ID_MODELO`),
   KEY `ID_CASO` (`ID_CASO`),
-  CONSTRAINT `modelos_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`)
+  CONSTRAINT `modelos_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -86,8 +86,8 @@ CREATE TABLE `stls` (
   PRIMARY KEY (`ID_STL`),
   KEY `ID_CASO` (`ID_CASO`),
   KEY `ID_MODELO` (`ID_MODELO`),
-  CONSTRAINT `stls_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`),
-  CONSTRAINT `stls_ibfk_2` FOREIGN KEY (`ID_MODELO`) REFERENCES `modelos` (`ID_MODELO`)
+  CONSTRAINT `stls_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`) ON DELETE CASCADE,
+  CONSTRAINT `stls_ibfk_2` FOREIGN KEY (`ID_MODELO`) REFERENCES `modelos` (`ID_MODELO`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

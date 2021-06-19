@@ -1,30 +1,10 @@
-/*$(document).ready(function() {
-	$("#btn_new").on("click", function(){
-		$("#formAddCase").modal();
-	});
-
-	$("#addCase").on("click", function(){
-		newCaso();
-	});
-
-
-});*/
-
+//Inicio
 function init(){
 	listCasos();
-	/*$("#btn_new").on("click", function(){
-		$("#formAddCase").modal();
-	});*/
-
-	/*$("#addCase").on("click", function(){
-		//newCaso();
-		$("#formAddCase").modal('hide');
-		listCasos();
-	});*/
-
 	
 }
 
+//Añade un caso
 function openModalCase(){
 	$("#formAddCase").modal();
 }
@@ -43,20 +23,7 @@ function newCaso(){
 	var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + 
 	(m.getUTCHours()+2) + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
 
-	console.log("TRAZA:"+traza+", fecha:"+dateString);
 
-	
-
-	/*$.ajax({
-        url: 'php/addCaso.php',
-        type: 'GET',
-		data: {Traza : traza, Fecha : dateString},
-        success: function(response){
-            var jsonData = JSON.stringify(response);
-			console.log(jsonData);
-
-		}
-    });*/
 	$.ajax({
         url: 'php/addCaso.php',
         type: 'post',
@@ -78,8 +45,9 @@ function newCaso(){
 
 
 }
+//Fin Añade un caso
 
-
+//List los casos
 function listCasos(){
 	$("#table > tbody > tr").remove();
 
@@ -109,11 +77,45 @@ function listCasos(){
 	});
 		
 }
+// Fin Lista los casos
 
+
+//Eliminia un caso
 function deleteCase(id_case){
 	alert("ELIMINAR "+id_case);
 
+	var datos = new FormData();
+    datos.append('IDCaso', id_case);
+
+
+	$.ajax({
+        url: 'php/deleteCaso.php',
+        type: 'POST',
+        data: datos,
+        processData: false,
+        contentType: false,
+		dataType: 'json'
+    })
+	.done(function(response){
+		var jsonData = JSON.stringify(response);
+		console.log("Salida:"+jsonData);
+		toastr.success('El Caso ha sido eliminado con éxito');
+
+	})
+	.fail(function(response){
+		var jsonData = JSON.stringify(response);
+		//console.log(jsonData);
+		toastr.error('Fallo. No se ha podido eliminar el caso.');
+
+	});
+
+	listCasos();
+
+
+
+
 }
+//Fin Elimina un caso
 
 function loadModels(id_case){
 	window.location="indexModelo.html?caso="+id_case;
@@ -122,6 +124,7 @@ function loadModels(id_case){
 
 var idCaso=1;
 
+//Añade un Modelo al caso indicado
 function openModalModel(id_case){
 	idCaso=id_case;
 	$("#formAddModel").modal();
@@ -134,7 +137,6 @@ function hideModalModel(){
 }
 
 function newModel(){
-	/*alert("AÑADIR MODELO PARA:"+id_case);*/
 	$("#formAddModel").modal();
 
 	var name=$("#inputName").val();
@@ -167,7 +169,7 @@ function newModel(){
 
 	});
 }
-
+//Fin Añade un modelos a caso seleccionado
 
 ////////////// API /////////////////
 function listaCasos(){

@@ -6,7 +6,7 @@ $DB_USER= "root";
 $DB_PASS = "anvimur2001lrvfg";
 $DB_NAME = "Cella2";
 
-//if ((! isset ( $_GET['IDCase'] )) )  { echo "0"; return; }
+if ((! isset ( $_POST['ID'] )) )  { echo "0"; return; }
 
 // Conecta con la base de datos
 //$db=mysqli_connect("Localhost", $DB_USER, $DB_PASS, $DB_NAME);
@@ -20,7 +20,7 @@ if (!$conn) {
 $conection="Connected successfully";
 
 // Variables
-//$caso=$_GET['IDCase'];
+$caso=$_POST['ID'];
 $IDsC[] = array();
 $IDsM[] = array();
 $Nombres[] = array(); 
@@ -32,7 +32,7 @@ $i=0;
 
 // Realiza la consulta - Obtenemos los datos de los modelos
 //$sql=mysqli_query($conn, "SELECT ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$caso.";");
-$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$_GET['ID'].";");
+$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$caso.";");
 
 while($row = mysqli_fetch_array($sql)) {
     $IDsC[$i] = $row[0];
@@ -54,10 +54,11 @@ for($j=0; $j<$max; $j++) {
     //echo "INDICE:".$j." VALOR1:".$resultado['ID_caso'].", VALOR 11:".$resultado['ID_modelo'].", VALOR2:".$resultado['Nombre'].", VALOR3:".$resultado['Fecha']."<br>";
     $respuesta[$j]=$resultado;
 }
-$salida['modelos']=$respuesta;
+//$salida='modelos' => $respuesta;
+//$salida['modelos']=$respuesta;
 
 
-echo json_encode($salida);
+echo json_encode($respuesta);
 mysqli_close($conn);
 
 ?>
