@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.34, for Linux (x86_64)
 --
--- Host: localhost    Database: Cella
+-- Host: localhost    Database: Cella2
 -- ------------------------------------------------------
 -- Server version	5.7.34-0ubuntu0.18.04.1
 
@@ -36,34 +36,8 @@ CREATE TABLE `casos` (
 
 LOCK TABLES `casos` WRITE;
 /*!40000 ALTER TABLE `casos` DISABLE KEYS */;
-/*INSERT INTO `casos` VALUES (1,'Prueba','2021-06-11 23:33:01'),(3,'Filoptroco','2021-06-13 19:44:44');*/
 /*!40000 ALTER TABLE `casos` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `migrations`
---
-
-/*LOCK TABLES `migrations` WRITE;*/
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-/*INSERT INTO `migrations` VALUES (7,'2021_06_10_130111_create_casos_table',1),(8,'2021_06_10_130141_create_modelos_table',1),(9,'2021_06_10_130344_create_stls_table',1);*/
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
-/*UNLOCK TABLES;*/
 
 --
 -- Table structure for table `modelos`
@@ -79,7 +53,8 @@ CREATE TABLE `modelos` (
   `Tipo` enum('hepatico','pancreatico','colorrectal','tiroides','otro') COLLATE utf8mb4_unicode_ci NOT NULL,
   `Fecha_hora_de_alta` datetime NOT NULL,
   PRIMARY KEY (`ID_MODELO`),
-  FOREIGN KEY (ID_CASO) REFERENCES casos(ID_CASO)
+  KEY `ID_CASO` (`ID_CASO`),
+  CONSTRAINT `modelos_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +64,6 @@ CREATE TABLE `modelos` (
 
 LOCK TABLES `modelos` WRITE;
 /*!40000 ALTER TABLE `modelos` DISABLE KEYS */;
-/*INSERT INTO `modelos` VALUES (1,1,'Modelo Tumor','pancreático','2021-06-11 23:37:30'),(2,1,'Modelo Hipertofico','otro','2021-06-11 23:38:17');*/
 /*!40000 ALTER TABLE `modelos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +84,10 @@ CREATE TABLE `stls` (
   `Transparencia` int(10) unsigned NOT NULL,
   `Orden` int(10) unsigned NOT NULL,
   PRIMARY KEY (`ID_STL`),
-  FOREIGN KEY (ID_CASO) REFERENCES casos(ID_CASO)
+  KEY `ID_CASO` (`ID_CASO`),
+  KEY `ID_MODELO` (`ID_MODELO`),
+  CONSTRAINT `stls_ibfk_1` FOREIGN KEY (`ID_CASO`) REFERENCES `casos` (`ID_CASO`),
+  CONSTRAINT `stls_ibfk_2` FOREIGN KEY (`ID_MODELO`) REFERENCES `modelos` (`ID_MODELO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -132,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-14  1:20:05
+-- Dump completed on 2021-06-18 21:35:10

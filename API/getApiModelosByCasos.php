@@ -1,7 +1,10 @@
 <?php
 
 // Carga configuracion
-require("config.php");
+$DB_LOCAL_SERVER = "Localhost";
+$DB_USER= "root";
+$DB_PASS = "anvimur2001lrvfg";
+$DB_NAME = "Cella2";
 
 //if ((! isset ( $_GET['IDCase'] )) )  { echo "0"; return; }
 
@@ -29,7 +32,7 @@ $i=0;
 
 // Realiza la consulta - Obtenemos los datos de los modelos
 //$sql=mysqli_query($conn, "SELECT ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$caso.";");
-$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos;");
+$sql=mysqli_query($conn, "SELECT ID_CASO, ID_MODELO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta FROM modelos WHERE ID_CASO=".$_GET['ID'].";");
 
 while($row = mysqli_fetch_array($sql)) {
     $IDsC[$i] = $row[0];
@@ -47,14 +50,14 @@ $max=$i;
 // Tranforma array de resultado en json
 for($j=0; $j<$max; $j++) {
     //$resultado=array('Id'=> $IDs[$j], 'Nombre' => $Nombres[$j], 'Tipo' => $Tipos[$j] ,'Fecha' => $Fechas[$j]);
-    $resultado=array('ID_caso' => $IDsC[$j], 'ID_modelo'=> $IDsM[$j], 'Nombre' => $Nombres[$j], 'Tipo' => $Tipos[$j], 'Fecha' => $Fechas[$j]);
+    $resultado=array('ID' => $IDsM[$j], 'ID_caso' => $IDsC[$j], 'Nombre' => $Nombres[$j], 'Fecha' => $Fechas[$j], 'Tipo' => $Tipos[$j]);
     //echo "INDICE:".$j." VALOR1:".$resultado['ID_caso'].", VALOR 11:".$resultado['ID_modelo'].", VALOR2:".$resultado['Nombre'].", VALOR3:".$resultado['Fecha']."<br>";
     $respuesta[$j]=$resultado;
 }
+$salida['modelos']=$respuesta;
 
 
-
-echo json_encode($respuesta);
+echo json_encode($salida);
 mysqli_close($conn);
 
 ?>

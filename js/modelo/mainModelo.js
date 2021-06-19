@@ -24,13 +24,12 @@ function listModels(){
         type: 'get',
         processData: false,
         contentType: false,
-		dataType: 'json',
+		dataType: 'json'
         //data: {IDCase : id_caso}
 	})
     .done(function(response){
-        $.each(response, function(i, item) {
-			console.log(item.Id);
-            if(item.ID_caso == id_caso){
+	        $.each(response, function(i, item) {
+			if(item.ID_caso == id_caso){
 
 			    element="<tr><td width='10px'>"+item.ID_modelo+"</td>";
 			    element+="<td>"+item.Nombre+"</td>";
@@ -52,48 +51,48 @@ function listModels(){
 
 var idModelo=1;
 
-function openModalModel(id_model){
-	idCaso=id_model;
-	$("#formAddModel").modal();
+function openModalSTL(id_model){
+	idModelo=id_model;
+	$("#formAddSTL").modal();
 }
 
-function hideModalModel(){
+function hideModalSTL(){
 	newSTL();
-	$("#formAddModel").modal('hide');
-	loadModels(idCaso);
+	$("#formAddSTL").modal('hide');
+	//loadSTLs();
 }
 
 function newSTL(){
-	/*alert("AÑADIR MODELO PARA:"+id_case);*/
-	$("#formAddModel").modal();
+	
+	//$("#formAddModel").modal();
 
 	var name=$("#inputName").val();
-	var tipe=$("#tipo_id").val();
-	var m=new Date();
-	var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + 
-	(m.getUTCHours()+2) + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
-
-	console.log("IDCASO:"+idCaso+", Nombre:"+name+", tipo:"+tipe+", fecha:"+dateString);
+	var colour=$("#inputcolor").val();
+	var visible=$("#visible_id").val();
+	var trans=$("#inputTrans").val();
+	var order=$("#inputOrder").val();
+	
+	console.log("IDC:"+id_caso+", IDM:"+idModelo+", NAME:"+name+", COLOR:"+colour+", VISIBLE:"+visible+", TRANS:"+trans+", ORDER:"+order);
 
 	
 
 
 	$.ajax({
         url: 'php/addSTL.php',
-        type: 'post',
+        type: 'get',
 		dataType: 'json',
-        data: {IdCaso:idCaso ,Nombre: name,Tipo: tipe, Fecha : dateString}
+        data: {IdCaso:id_caso, IdModelo:idModelo ,Nombre: name, Color: colour, Visible :visible, Transp: trans, Orden: order}
     })
 	.done(function(response){
 		var jsonData = JSON.stringify(response);
 		console.log("Salida:"+jsonData);
-		toastr.success('Nueva Modelo creada con éxito');
+		toastr.success('Nueva Elemento STL creada con éxito');
 
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
 		//console.log(jsonData);
-		toastr.error('Fallo. No se ha podido añadir el Modelo.');
+		toastr.error('Fallo. No se ha podido añadir el elemento.');
 
 	});
 }
@@ -103,4 +102,22 @@ function newSTL(){
 
 function returnToCases(){
     window.location="indexCaso.html";
+}
+
+
+
+
+////////////// API /////////////////
+function listaModelosByCasos(id_caso){
+	$.ajax({
+        url: 'API/getApiModelosByCasos.php',
+        type: 'get',
+        processData: false,
+		contentType: false,
+		dataType: 'json',
+		data: {ID:id_caso}
+	})
+    .done(function(response){
+		return response;
+	});
 }

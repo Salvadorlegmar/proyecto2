@@ -108,7 +108,6 @@ function listCasos(){
 		});
 	});
 		
-
 }
 
 function deleteCase(id_case){
@@ -166,5 +165,20 @@ function newModel(){
 		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido añadir el Modelo.');
 
+	});
+}
+
+
+////////////// API /////////////////
+function listaCasos(){
+	$.ajax({
+        url: 'API/getApiCasos.php',
+        type: 'get',
+        processData: false,
+		contentType: false,
+		dataType: 'json'
+	})
+    .done(function(response){
+		return response;
 	});
 }

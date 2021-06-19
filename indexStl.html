@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/caso/style.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/toastr.css">
+    <link href="css/bootstrap-colorpicker/bootstrap-colorpicker.css" rel="stylesheet">
 
     <script type="text/javascript" src="js/modelo/mainModelo.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -16,6 +17,8 @@
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script type="text/javascript" src="js/toastr.js"></script>
     <script type="text/javascript" src="js/axios.js"></script>
+    <script src="js/bootstrap-colorpicker/bootstrap-colorpicker.js"></script>
+
     <title>Casos</title>
 </head>
 <body onload="listModels();">
@@ -73,8 +76,20 @@
                             <input id="inputName" type="text" name="name" class="form-control"> 
                             
                             <br>
-                            <label for="color">Color</label>
-                            <input id="inputName" type="text" name="name" class="form-control">
+                            <!--<label for="color">Color</label>
+                            <input id="inputName" type="text" name="name" class="form-control">-->
+                            <div id="color-picker-rgb" class="input-group colorpicker-component">
+                                <input type="text" value="#05FF44" class="form-control"/>
+                                <span class="input-group-addon"><i></i></span>
+                            </div>
+                            <script>
+                                $(function () {
+                                    $('#color-picker-rgb').colorpicker({
+                                        color: '#05FF44',
+                                        format: 'rgba'
+                                    });
+                                });
+                            </script>
 
                             <br>    
                             <div>
