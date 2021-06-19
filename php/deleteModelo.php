@@ -16,11 +16,13 @@ if ((! isset ( $_POST['IDModelo'] )))  { echo "0"; return; }
 // Variables
 $modelo=$_POST['IDModelo'];
 
+//Borramos el Modelo en las dos tablas
 $sql1=mysqli_query($db, "DELETE FROM stls WHERE ID_MODELO=".$modelo);
 $sql2=mysqli_query($db, "DELETE FROM modelos WHERE ID_MODELO=".$modelo);
 
 
-$respuest="OK";
+$resultado=array('ID' => $modelo);
+$respuesta[0]=$resultado;
 
 echo json_encode($respuesta);
 mysqli_close($db)

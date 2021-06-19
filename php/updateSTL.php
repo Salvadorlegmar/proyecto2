@@ -8,7 +8,6 @@ if ((! isset ( $_POST['IDStl'] )) || (! isset ( $_POST['Nombre'] )) || (! isset 
 $idstl=$_POST['IDStl'];
 $name=$_POST['Nombre'];
 $color=$_POST['Color'];
-//echo "VALOR DE ID:".$idstl.", NOMBRE:".$name.", COLOR".$color,"<br>";
 $visible=$_POST['Visible'];
 $transp=$_POST['Transp'];
 $orden=$_POST['Orden'];
@@ -18,12 +17,11 @@ $db=mysqli_connect("Localhost", $DB_USER, $DB_PASS, $DB_NAME);
 if (mysqli_connect_errno()) { echo "0" ; return ; }
 
 
-//$consulta= "UPDATE stls SET Nombre_del_elemento='".$name."', Color='".$color."', Visible=".$visible.", Transparencia=".$transp.", Orden=".$orden." WHERE ID_STL=".$idstl.";";
-//echo $consulta;
-
+//Elecutamos la query
 $query = mysqli_query($db, "UPDATE stls SET Nombre_del_elemento='".$name."', Color='".$color."', Visible=".$visible.", Transparencia=".$transp.", Orden=".$orden." WHERE ID_STL=".$idstl.";");
 $query = mysqli_query($db, "COMMIT;"); 
 
+//Devolvemos algo en el JSON
 $resultado=array('Nombre' => $name);
 $respuesta[0]=$resultado;
 

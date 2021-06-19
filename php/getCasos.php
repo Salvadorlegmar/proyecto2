@@ -16,7 +16,7 @@ $Fechas[] = array();
 $i=0;
 
 
-// Realiza la consulta - Obtenemos los ID de los streams que forman la tarifa correspondiente
+// Realiza la consulta - Obtenemos los Casos
 $sql=mysqli_query($db, "SELECT DISTINCT ID_CASO, Trazabilidad_hospital, Fecha_hora_de_alta FROM casos;");
 
 while($row = mysqli_fetch_array($sql)) {

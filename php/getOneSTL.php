@@ -24,8 +24,7 @@ $Ordene[] = array();
 $i=0;
 
 
-
-// Realiza la consulta - Obtenemos los datos de los modelos
+// Realiza la consulta - Obtenemos los datos de un STL selecto
 $sql=mysqli_query($conn, "SELECT Nombre_del_elemento, Color, Visible, Transparencia, Orden FROM stls WHERE ID_STL=".$stl.";");
 
 
@@ -47,15 +46,11 @@ while($row = mysqli_fetch_array($sql)) {
 $max=$i;
 
 
-
-
 // Tranforma array de resultado en json
 for($j=0; $j<$max; $j++) {
     $resultado=array('Nombre' => $Nombre[$j], 'Color'=> $Color[$j], 'Visible' => $Visible[$j], 'Transp' => $Transparencia[$j], 'Orden' => $Orden[$j]);
     $respuesta[$j]=$resultado;
 }
-
-
 
 echo json_encode($respuesta);
 mysqli_close($conn);

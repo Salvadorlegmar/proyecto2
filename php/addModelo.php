@@ -16,13 +16,11 @@ $db=mysqli_connect("Localhost", $DB_USER, $DB_PASS, $DB_NAME);
 if (mysqli_connect_errno()) { echo "0" ; return ; }
 
 
-
-//echo json_encode(array('TRAZA' => 1));
-//response= "TRAZA:".$_GET['Traza'].", FECHA:".$_GET['Fecha'];
-
+//Ejecuta la query
 $query = mysqli_query($db, "INSERT INTO modelos (ID_CASO, Nombre_del_modelo, Tipo, Fecha_hora_de_alta) VALUES (".$caso.", '".$name."','".$tipo."', '".$date."');");
 $query = mysqli_query($db, "COMMIT;"); 
 
+//Generamos el Json de salida por mostrar algo
 $resultado=array('Nombre' => $name, 'Tipo' => $tipo, 'Fecha' => $date);
 $respuesta[0]=$resultado;
 

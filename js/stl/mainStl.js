@@ -12,9 +12,11 @@ function getUrlVars(){
     return vars;
 }
 
+//Establecemos las variables del Caso y el Modelo
 var id_caso = getUrlVars()["caso"]; id_caso = (typeof id_caso === 'undefined') ? 1 : id_caso;
 var id_modelo = getUrlVars()["modelo"]; id_modelo = (typeof id_modelo === 'undefined') ? 1 : id_modelo;
 
+//Listamos los STLs
 function lisSTLs(){
     $("#table > tbody > tr").remove();
 
@@ -31,20 +33,13 @@ function lisSTLs(){
         processData: false,
         contentType: false,
         dataType: 'json'
-        //data: {IDCase : id_caso, IDModel : id_modelo}
 	})
     .done(function(response){
-        //console.log("PRIMERO:"+response);
 	    $.each(response, function(i, item) {
-            //console.log("SALIDA:"+item.ID_stl);
-			/*if(item.ID_caso == id_caso){*/
 
 			element="<tr><td width='10px'>"+item.ID_stl+"</td>";
 			element+="<td>"+item.Nombre+"</td>";
             element+="<td>"+item.Color+"</td>";
-
-           //element+="<td> <input id='inputcolor"+item.ID_stl+" value="+item.Color+" data-jscolor='{}'></td>";
-
 			element+="<td>"+item.Visible+"</td>";
             element+="<td>"+item.Transp+"</td>";
             element+="<td>"+item.Orden+"</td>";
@@ -60,13 +55,11 @@ function lisSTLs(){
 	});
 
 }
+//Fin Listamos los STLs
 
-//var idStl=1;
 
-//Editar un STL
-
+//Editar y actualizar un STL
 function openModalSTL(id_stl){
-	//idStl=ID_stl;
 
     var datos = new FormData();
     datos.append('IDSTL', id_stl);
@@ -78,14 +71,10 @@ function openModalSTL(id_stl){
         processData: false,
         contentType: false,
         dataType: 'json'
-        //data: {IDCase : id_caso, IDModel : id_modelo}
 	})
     .done(function(response){
-        console.log("recupero:"+response);
 	    $.each(response, function(i, item) {
-            console.log("SALIDA:"+item);
-			/*if(item.ID_caso == id_caso){*/
-            
+       
             $("#idstl").val(id_stl);
 
             $("#inputName").val(item.Nombre);
@@ -99,7 +88,6 @@ function openModalSTL(id_stl){
 
 
 	$("#formEditSTL").modal();
-    //loadDatosStl(id_stl)
 }
 
 function hideModalUpdateTL(){
@@ -111,8 +99,6 @@ function hideModalUpdateTL(){
 }
 
 function updateSTL(id_stl){
-	
-	//$("#formAddModel").modal();
 
 	var name=$("#inputName").val();
 	var colour=$("#inputModalcolor").val();
@@ -147,52 +133,53 @@ function updateSTL(id_stl){
     })
 	.done(function(response){
 		var jsonData = JSON.stringify(response);
-		console.log("Salida:"+jsonData);
 		toastr.success('Nueva Elemento STL actualizado con éxito');
 
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
-		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido actualizar el elemento.');
 
 	});
 }
-
+//Fin Editar y actualizar un STL
 
 
 
 //Elimina un STL
 function deleteSTL(id_stl){
-    removeSTL(id_stl);
-    lisSTLs();
-}
 
-function removeSTL(id_stl){
-	//alert("ELIMINAR "+id_stl);
-
-    const datos = new FormData();
-    datos.append('IDStl', id_stl);
-
+    var datos = new FormData();
+    datos.append('IDSTL', id_stl);
 
 	$.ajax({
         url: 'php/deleteStl.php',
         type: 'POST',
-        data: {IDStl:id_stl},
+        data: datos,
+        processData: false,
+        contentType: false,
 		dataType: 'json'
     })
 	.done(function(response){
-        console.log("PRIMERA:"+response)
-		toastr.success('El Elemento STL ha sido eliminado con éxito');
+		var jsonData = JSON.stringify(response);
+		toastr.success('El STL ha sido eliminado con éxito');
+
+	})
+	.fail(function(response){
+		var jsonData = JSON.stringify(response);
+		toastr.error('Fallo. No se ha podido eliminar el STL.');
 
 	});
+
+    lisSTLs();
 
 }
 //Fin Elimina un STL
 
 
 
-
+//Volvemos a la pagina de los Modelos
 function returnToModels(){
     window.location="indexModelo.html?caso="+id_caso;
 }
+//Fin Volvemos a la pagina de los Modelos

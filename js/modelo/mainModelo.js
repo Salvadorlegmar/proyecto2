@@ -3,7 +3,6 @@ function getUrlVars(){
 
     var vars = [], hash;
 
-    //var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -13,8 +12,10 @@ function getUrlVars(){
     return vars;
 }
 
+//Establecemos el valor del Caso
 var id_caso = getUrlVars()["caso"]; id_caso = (typeof id_caso === 'undefined') ? 1 : id_caso;
 
+//Listamos los modelos
 function listModels(){
 	$("#table > tbody > tr").remove();
 
@@ -31,12 +32,9 @@ function listModels(){
         contentType: false,
 		dataType: 'json',
 		data: datos
-        //data: {IDCase : id_caso}
 	})
     .done(function(response){
 	        $.each(response, function(i, item) {
-			//if(item.ID_caso == id_caso){
-
 			    element="<tr><td width='5px'>"+item.ID_modelo+"</td>";
 			    element+="<td>"+item.Nombre+"</td>";
                 element+="<td>"+item.Tipo+"</td>";
@@ -49,8 +47,8 @@ function listModels(){
 
 
 			    $("#table > tbody").append(element);
-            //}
-		});
+            
+			});
 	});
 
 }
@@ -59,8 +57,6 @@ function listModels(){
 
 //Elimina un modelo
 function deleteModel(id_model){
-	alert("ELIMINAR "+id_model);
-
 	var datos = new FormData();
     datos.append('IDModelo', id_model);
 
@@ -92,15 +88,16 @@ function deleteModel(id_model){
 
 
 
-
+//Accedemos a la pagina de los Elementos STLs asociados al Caso y al Modelo
 function loadSTLs(id_model){
 	window.location="indexStl.html?caso="+id_caso+"&modelo="+id_model;
 
 }
-
+//Fin Accedemos a la pagina de los Elementos STLs asociados al Caso y al Modelo
 
 var idModelo=1;
 
+//Añadimos un nuevo STL
 function openModalSTL(id_model){
 	idModelo=id_model;
 	$("#formAddSTL").modal();
@@ -109,12 +106,10 @@ function openModalSTL(id_model){
 function hideModalSTL(){
 	newSTL();
 	$("#formAddSTL").modal('hide');
-	//loadSTLs();
 }
 
 function newSTL(){
-	
-	//$("#formAddModel").modal();
+
 
 	var name=$("#inputName").val();
 	var colour=$("#inputcolor").val();
@@ -122,10 +117,6 @@ function newSTL(){
 	var trans=$("#inputTrans").val();
 	var order=$("#inputOrder").val();
 	
-	console.log("IDC:"+id_caso+", IDM:"+idModelo+", NAME:"+name+", COLOR:"+colour+", VISIBLE:"+visible+", TRANS:"+trans+", ORDER:"+order);
-
-	
-
 
 	$.ajax({
         url: 'php/addSTL.php',
@@ -141,19 +132,19 @@ function newSTL(){
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
-		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido añadir el elemento.');
 
 	});
 }
+//Fin Añadimos un nuevo STL
 
 
 
-
+//Volvemos a la pagina de los Casos
 function returnToCases(){
     window.location="indexCaso.html";
 }
-
+//Fin Volvemos a la pagina de los Casos
 
 
 

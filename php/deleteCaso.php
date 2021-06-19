@@ -17,11 +17,13 @@ if ((! isset ( $_POST['IDCaso'] )))  { echo "0"; return; }
 // Variables
 $caso=$_POST['IDCaso'];
 
+//Borramos el caso en las tres tablas
 $sql1=mysqli_query($db, "DELETE FROM stls WHERE ID_CASO=".$caso);
 $sql2=mysqli_query($db, "DELETE FROM modelos WHERE ID_CASO=".$caso);
 $sql3=mysqli_query($db, "DELETE FROM casos WHERE ID_CASO=".$caso);
 
-$respuest="OK";
+$resultado=array('ID' => $caso);
+$respuesta[0]=$resultado;
 
 echo json_encode($respuesta);
 mysqli_close($db);

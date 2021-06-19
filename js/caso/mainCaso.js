@@ -12,7 +12,6 @@ function openModalCase(){
 function hideModalCase(){
 	newCaso();
 	$("#formAddCase").modal('hide');
-	//window.location="indexCaso.html";
 	listCasos();
 }
 
@@ -38,7 +37,6 @@ function newCaso(){
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
-		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido añadir el Caso.');
 
 	});
@@ -82,7 +80,6 @@ function listCasos(){
 
 //Eliminia un caso
 function deleteCase(id_case){
-	alert("ELIMINAR "+id_case);
 
 	var datos = new FormData();
     datos.append('IDCaso', id_case);
@@ -104,15 +101,11 @@ function deleteCase(id_case){
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
-		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido eliminar el caso.');
 
 	});
 
 	listCasos();
-
-
-
 
 }
 //Fin Elimina un caso
@@ -145,11 +138,7 @@ function newModel(){
 	var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + 
 	(m.getUTCHours()+2) + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
 
-	console.log("IDCASO:"+idCaso+", Nombre:"+name+", tipo:"+tipe+", fecha:"+dateString);
-
 	
-
-
 	$.ajax({
         url: 'php/addModelo.php',
         type: 'post',
@@ -164,12 +153,14 @@ function newModel(){
 	})
 	.fail(function(response){
 		var jsonData = JSON.stringify(response);
-		//console.log(jsonData);
 		toastr.error('Fallo. No se ha podido añadir el Modelo.');
 
 	});
 }
 //Fin Añade un modelos a caso seleccionado
+
+
+
 
 ////////////// API /////////////////
 function listaCasos(){

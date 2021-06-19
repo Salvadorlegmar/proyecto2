@@ -1,9 +1,6 @@
 <?php
-
 // Carga configuracion
 require("config.php");
-
-if ((! isset ( $_POST['IDStl'] )))  { echo "0"; return; }
 
 
 $conn = mysqli_connect("localhost", $DB_USER, $DB_PASS, $DB_NAME);
@@ -14,19 +11,20 @@ if (!$conn) {
 $conection="Connected successfully";
 
 
-//echo $conection;
-//echo "IDSTL=".$_GET['IDStl'];
-
+if ((! isset ( $_POST['IDSTL'] ))) { echo "0"; return; }
 // Variables
-/*$stl=$_GET['IDStl'];
+$stl=$_POST['IDSTL'];
 
+
+
+//Borramos el STL en la tabla stls
 $sql1=mysqli_query($db, "DELETE FROM stls WHERE ID_STL=".$stl);
 
 
-$resultado=array('ID' => $stl);*/
-$resultado=$conection;
+$resultado=array('ID' => $stl);
 $respuesta[0]=$resultado;
 
 echo json_encode($respuesta);
 mysqli_close($db)
+
 ?>
