@@ -18,13 +18,13 @@ $stl=$_POST['IDSTL'];
 
 
 //Borramos el STL en la tabla stls
-$sql1=mysqli_query($db, "DELETE FROM stls WHERE ID_STL=".$stl);
+$sql1=mysqli_query($conn, "DELETE FROM stls WHERE ID_STL=".$stl);
 
 
 $resultado=array('ID' => $stl);
 $respuesta[0]=$resultado;
 
 echo json_encode($respuesta);
-mysqli_close($db)
+mysqli_close($conn)
 
 ?>
